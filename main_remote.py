@@ -265,9 +265,11 @@ def main(
         debug=True,
         routes=[
             Mount("/mcp", app=handle_streamable_http),
+            Mount("/mcp/", app=handle_streamable_http),
         ],
         lifespan=lifespan,
     )
+    starlette_app.router.redirect_slashes = False
 
     # Add bearer auth middleware if token is provided
     if auth_token:
